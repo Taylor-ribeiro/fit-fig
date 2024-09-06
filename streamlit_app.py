@@ -5,7 +5,6 @@ st.write(
     "Get Personalized Ai Training Plans"
 )
 
-st.image()
 st.write(
     "Get Personalized Ai Training Plans"
 )
