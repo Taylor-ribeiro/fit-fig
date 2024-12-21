@@ -1,6 +1,6 @@
-# 🎈 Blank app template
+# Fit Fig App
 
-A simple Streamlit app template for you to modify!
+Welcome! This "personal trainer" app designs custom training plans for a wide range of individuals seeking improvements to their fitness. The user simply fills out the form and the app will use an LLM to come up with an intelligent response.
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
