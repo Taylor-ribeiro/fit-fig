@@ -1,3 +1,5 @@
+from fnmatch import translate
+
 import streamlit as st
 from langchain_openai.chat_models import ChatOpenAI
 
@@ -24,7 +26,7 @@ with (((st.form("my_form")))):
                               placeholder = 'select one'
         )
         experience = st.selectbox("What is experience with weight lifting, in general?",
-                                  ("I don't know anything", "I know the basics", "I know a lot"),
+                                  ("don't know anything", "know the basics", "know a lot"),
                                   index=None,
                                   placeholder='select one'
         )
@@ -35,14 +37,20 @@ with (((st.form("my_form")))):
                             index=None,
                             placeholder='select one'
         )
-        equipment = st.selectbox("Do you have access to a gym or will you be primarly working out at home?",
-                                 ("Yes, I have or will get a gym membership", "I work out at home, but I have a bench, dumbells, and basic equipment", "No, I will work out at home and have very little equipment"),
+        equipment = st.selectbox("Do you have access to a gym or will you be primarily working out at home?",
+                                 ("Yes, I have or will get a gym membership", "I work out at home, but I have a bench, dumbbells, and basic equipment", "No, I will work out at home and have very little equipment"),
                                  index=None,
                                  placeholder='select one'
                                  )
+    equip = {"Yes, I have or will get a gym membership" : "standard gym",
+             "I work out at home, but I have a bench, dumbbells, and basic equipment" : "some",
+             "No, I will work out at home and have very little equipment" : "no"
+            }
 
+    equipment = equip.get(equipment, "unknown")
 
-    text = f"Using the principles of NASM, generate a 1 month training plan for a client looking to {intent}"
+    text = f"Using the principles of NASM, generate a 1 month training plan for a client looking to {intent} and they {experience} about exercise. Design the training plan for {time} days a week, and require {equipment} equipment."
+
     submitted = st.form_submit_button("Submit")
     if not openai_api_key.startswith("sk-"):
         st.warning("Please enter your OpenAI API key!", icon="⚠")
